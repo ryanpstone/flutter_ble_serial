@@ -14,4 +14,10 @@ class MethodChannelFlutterBleSerial extends FlutterBleSerialPlatform {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+
+  @override
+  Future<bool?> isBluetoothEnabled() async {
+    final isBluetoothEnabled = await methodChannel.invokeMethod<bool>('isBluetoothEnabled');
+    return isBluetoothEnabled;
+  }
 }

@@ -17,12 +17,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  bool _isBluetoothEnabled = false;
   final _flutterBleSerialPlugin = FlutterBleSerial();
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
+    initBluetoothEnabledState();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -47,6 +49,22 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  Future<void> initBluetoothEnabledState() async {
+    bool isBluetoothEnabled;
+
+    try {
+      isBluetoothEnabled = await _flutterBleSerialPlugin.isBluetoothEnabled() ?? false;
+    } on PlatformException {
+      isBluetoothEnabled = false;
+    }
+
+    if (!mounted) return;
+    setState(() {
+      _isBluetoothEnabled = isBluetoothEnabled;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -55,7 +73,12 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children: [
+              Text('Running on: $_platformVersion\n'),
+              Text('isBluetoothEnabled: $_isBluetoothEnabled\n'),
+            ],
+          )
         ),
       ),
     );

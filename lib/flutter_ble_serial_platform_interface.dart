@@ -26,4 +26,8 @@ abstract class FlutterBleSerialPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<bool?> isBluetoothEnabled() {
+    throw UnimplementedError('bluetoothEnabled() has not been implemented.');
+  }
 }

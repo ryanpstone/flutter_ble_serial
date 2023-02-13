@@ -10,6 +10,9 @@ class MockFlutterBleSerialPlatform
 
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
+
+  @override
+  Future<bool?> isBluetoothEnabled() => Future.value(false);
 }
 
 void main() {
