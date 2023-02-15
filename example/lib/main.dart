@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     initPlatformState();
     initBluetoothEnabledState();
+
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -50,6 +51,21 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initBluetoothEnabledState() async {
+    bool isBluetoothEnabled;
+
+    try {
+      isBluetoothEnabled = await _flutterBleSerialPlugin.isBluetoothEnabled() ?? false;
+    } on PlatformException {
+      isBluetoothEnabled = false;
+    }
+
+    if (!mounted) return;
+    setState(() {
+      _isBluetoothEnabled = isBluetoothEnabled;
+    });
+  }
+
+  Future<void> initStartPluginState() async {
     bool isBluetoothEnabled;
 
     try {

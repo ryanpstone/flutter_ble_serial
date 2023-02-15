@@ -10,6 +10,18 @@ class MethodChannelFlutterBleSerial extends FlutterBleSerialPlatform {
   final methodChannel = const MethodChannel('flutter_ble_serial');
 
   @override
+  Future<void> startPlugin() async {
+    final version = await methodChannel.invokeMethod<void>('startPlugin');
+    return version;
+  }
+
+  @override
+  Future<void> stopPlugin() async {
+    final version = await methodChannel.invokeMethod<void>('stopPlugin');
+    return version;
+  }
+
+  @override
   Future<String?> getPlatformVersion() async {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;

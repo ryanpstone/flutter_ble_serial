@@ -1,9 +1,10 @@
-import 'dart:io' show Platform;
+import 'dart:io';
 import 'dart:async';
+
 
 import 'flutter_ble_serial_platform_interface.dart';
 
-// Subclass of BluetoothAdapter. Interfaces with Android system service.
+// Interfaces with Android system service.
 class BluetoothManager {
 
   // Constructor
@@ -39,12 +40,21 @@ class BluetoothAdapter {
   }
 }
 
+
 // Check for permissions must be done within adapter?
 class FlutterBleSerial {
-  // static final BluetoothAdapter bluetoothAdapter = BluetoothAdapter();
+  BluetoothAdapter? _bluetoothAdapter;
 
   FlutterBleSerial() {
-    print("Plugin loaded.");
+    _bluetoothAdapter = BluetoothAdapter();
+  }
+
+  Future<void> startPlugin() {
+    return FlutterBleSerialPlatform.instance.startPlugin();
+  }
+
+  Future<void> stopPlugin() {
+    return FlutterBleSerialPlatform.instance.stopPlugin();
   }
 
   Future<String?> getPlatformVersion() {

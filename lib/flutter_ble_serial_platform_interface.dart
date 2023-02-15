@@ -23,11 +23,19 @@ abstract class FlutterBleSerialPlatform extends PlatformInterface {
     _instance = instance;
   }
 
+  Future<void> startPlugin() {
+    throw UnimplementedError('startPlugin() has not been implemented.');
+  }
+
+  Future<void> stopPlugin() {
+    throw UnimplementedError('stopPlugin() has not been implemented.');
+  }
+
   Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+    throw UnimplementedError('getPlatformVersion() has not been implemented.');
   }
 
   Future<bool?> isBluetoothEnabled() {
-    throw UnimplementedError('bluetoothEnabled() has not been implemented.');
+    throw UnimplementedError('isBluetoothEnabled() has not been implemented.');
   }
 }
